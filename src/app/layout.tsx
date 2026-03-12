@@ -2,31 +2,54 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? "https://junubhive.vercel.app"
+  ),
   title: {
     default: "JunubHive — Find Your Match",
     template: "%s | JunubHive",
   },
   description:
-    "JunubHive is a modern dating app designed for meaningful connections in the Arab world.",
-  keywords: ["dating", "matches", "connections", "Arab", "relationships"],
+    "JunubHive is a modern dating app designed for meaningful connections.",
+  keywords: ["dating", "matches", "connections", "South Sudan", "relationships", "JunubHive"],
   authors: [{ name: "JunubHive" }],
   creator: "JunubHive",
   publisher: "JunubHive",
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
     title: "JunubHive",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   openGraph: {
     type: "website",
     siteName: "JunubHive",
     title: "JunubHive — Find Your Match",
     description: "Modern dating for meaningful connections.",
+    images: [{ url: "/icon-512.png", width: 512, height: 512 }],
+  },
+  twitter: {
+    card: "summary",
+    title: "JunubHive — Find Your Match",
+    description: "Modern dating for meaningful connections.",
+    images: ["/icon-512.png"],
   },
 };
 
@@ -67,3 +90,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+

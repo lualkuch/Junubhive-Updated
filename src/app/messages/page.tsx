@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Search, MessageCircle } from "lucide-react";
 import BottomNav from "@/components/ui/BottomNav";
 import { mockMatches } from "@/lib/mock-data";
-import { formatLastSeen, getInitials } from "@/lib/utils";
+import { getInitials } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 export default function MessagesPage() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Send, MoreVertical, BadgeCheck } from "lucide-react";
@@ -8,8 +8,9 @@ import { mockMatches, mockMessages } from "@/lib/mock-data";
 import { Message } from "@/types";
 import { cn } from "@/lib/utils";
 
-export default function ChatPage({ params }: { params: { id: string } }) {
-  const match = mockMatches.find((m) => m.id === params.id) || mockMatches[0];
+export default function ChatPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  const match = mockMatches.find((m) => m.id === id) || mockMatches[0];
   const [messages, setMessages] = useState<Message[]>(mockMessages);
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -102,8 +103,7 @@ export default function ChatPage({ params }: { params: { id: string } }) {
         <div className="flex flex-col items-center gap-3 py-6 mb-2">
           <div className="flex -space-x-4">
             <div
-              className="w-14 h-14 rounded-2xl overflow-hidden z-10 ring-2"
-              style={{ ringColor: "var(--bg)" }}
+              className="w-14 h-14 rounded-2xl overflow-hidden z-10 ring-2 ring-[var(--bg)]"
             >
               <Image
                 src={match.profile.photos[0]}
@@ -163,16 +163,16 @@ export default function ChatPage({ params }: { params: { id: string } }) {
                 style={
                   isMe
                     ? {
-                        background: "linear-gradient(135deg, #ff3621, #ff5c47)",
-                        color: "white",
-                        borderBottomRightRadius: "8px",
-                      }
+                      background: "linear-gradient(135deg, #ff3621, #ff5c47)",
+                      color: "white",
+                      borderBottomRightRadius: "8px",
+                    }
                     : {
-                        background: "var(--bg-card)",
-                        color: "var(--text-primary)",
-                        border: "1px solid var(--border)",
-                        borderBottomLeftRadius: "8px",
-                      }
+                      background: "var(--bg-card)",
+                      color: "var(--text-primary)",
+                      border: "1px solid var(--border)",
+                      borderBottomLeftRadius: "8px",
+                    }
                 }
               >
                 {msg.content}

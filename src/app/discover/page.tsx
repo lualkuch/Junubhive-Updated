@@ -9,17 +9,14 @@ import { Profile } from "@/types";
 
 export default function DiscoverPage() {
   const [profiles, setProfiles] = useState<Profile[]>(mockProfiles);
-  const [lastAction, setLastAction] = useState<"like" | "pass" | "super" | null>(null);
   const [showMatch, setShowMatch] = useState<Profile | null>(null);
 
   function handleSwipeLeft() {
-    setLastAction("pass");
     setProfiles((p) => p.slice(1));
   }
 
   function handleSwipeRight() {
     const current = profiles[0];
-    setLastAction("like");
     setProfiles((p) => p.slice(1));
     // Simulate 30% match rate
     if (Math.random() > 0.7) {
@@ -28,7 +25,6 @@ export default function DiscoverPage() {
   }
 
   function handleSuperLike() {
-    setLastAction("super");
     setProfiles((p) => p.slice(1));
   }
 

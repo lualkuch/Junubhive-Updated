@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   Settings,
@@ -9,7 +9,6 @@ import {
   MapPin,
   Briefcase,
   GraduationCap,
-  Heart,
   Shield,
   Bell,
   HelpCircle,
@@ -35,7 +34,19 @@ const mockCurrentUser = {
   stats: { likes: 47, matches: 12, superLikes: 3 },
 };
 
-const settingsGroups = [
+type SettingsItem = {
+  icon: React.FC<{ className?: string; style?: React.CSSProperties }>;
+  label: string;
+  destructive?: boolean;
+  accent?: boolean;
+};
+
+type SettingsGroup = {
+  title: string;
+  items: SettingsItem[];
+};
+
+const settingsGroups: SettingsGroup[] = [
   {
     title: "Account",
     items: [
@@ -281,8 +292,8 @@ export default function ProfilePage() {
                         background: destructive
                           ? "rgba(239,68,68,0.1)"
                           : accent
-                          ? "rgba(59,130,246,0.1)"
-                          : "var(--bg)",
+                            ? "rgba(59,130,246,0.1)"
+                            : "var(--bg)",
                       }}
                     >
                       <Icon
@@ -291,8 +302,8 @@ export default function ProfilePage() {
                           color: destructive
                             ? "#ef4444"
                             : accent
-                            ? "#3b82f6"
-                            : "var(--text-secondary)",
+                              ? "#3b82f6"
+                              : "var(--text-secondary)",
                         }}
                       />
                     </div>
